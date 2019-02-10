@@ -11,7 +11,7 @@ import LinkToAssetById from "../Utility/LinkToAssetById";
 import BindToChainState from "../Utility/BindToChainState";
 import ChainTypes from "../Utility/ChainTypes";
 import TranslateWithLinks from "../Utility/TranslateWithLinks";
-import {ChainStore, ChainTypes as grapheneChainTypes} from "bitsharesjs";
+import {ChainStore, ChainTypes as grapheneChainTypes} from "eidosjs";
 import account_constants from "chain/account_constants";
 import MemoText from "./MemoText";
 import ProposedOperation from "./ProposedOperation";
@@ -19,7 +19,6 @@ import marketUtils from "common/market_utils";
 import {connect} from "alt-react";
 import SettingsStore from "stores/SettingsStore";
 import PropTypes from "prop-types";
-import {Tooltip} from "bitshares-ui-style-guide";
 
 const {operations} = grapheneChainTypes;
 require("./operations.scss");
@@ -112,21 +111,24 @@ class Row extends React.Component {
                         style={{textAlign: "left"}}
                         className="left-td column-hide-tiny"
                     >
-                        <Tooltip
-                            placement="bottom"
-                            title={counterpart.translate("tooltip.show_block", {
-                                block: utils.format_number(this.props.block, 0)
-                            })}
+                        <Link
+                            className="inline-block"
+                            data-place="bottom"
+                            data-tip={counterpart.translate(
+                                "tooltip.show_block",
+                                {
+                                    block: utils.format_number(
+                                        this.props.block,
+                                        0
+                                    )
+                                }
+                            )}
+                            to={`/block/${this.props.block}/${
+                                this.props.txIndex
+                            }`}
                         >
-                            <Link
-                                className="inline-block"
-                                to={`/block/${this.props.block}/${
-                                    this.props.txIndex
-                                }`}
-                            >
-                                <TransactionLabel color={color} type={type} />
-                            </Link>
-                        </Tooltip>
+                            <TransactionLabel color={color} type={type} />
+                        </Link>
                     </td>
                 )}
 

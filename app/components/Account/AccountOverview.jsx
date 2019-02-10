@@ -6,7 +6,7 @@ import AssetName from "../Utility/AssetName";
 import MarginPositionsTable from "./MarginPositionsTable";
 import {RecentTransactions} from "./RecentTransactions";
 import Proposals from "components/Account/Proposals";
-import {ChainStore} from "bitsharesjs";
+import {ChainStore} from "eidosjs";
 import SettingsActions from "actions/SettingsActions";
 import utils from "common/utils";
 import {Tabs, Tab} from "../Utility/Tabs";
@@ -650,12 +650,7 @@ class AccountOverview extends React.Component {
                                             : 0
                                     )}
                                 >
-                                    <div
-                                        onClick={this._toggleHideProposal.bind(
-                                            this
-                                        )}
-                                        style={{cursor: "pointer"}}
-                                    >
+                                    <div>
                                         <Switch
                                             style={{margin: 16}}
                                             checked={
@@ -669,7 +664,7 @@ class AccountOverview extends React.Component {
                                     </div>
                                     <Proposals
                                         className="dashboard-table"
-                                        account={account}
+                                        account={account.get("id")}
                                         hideFishingProposals={
                                             this.state.hideFishingProposals
                                         }

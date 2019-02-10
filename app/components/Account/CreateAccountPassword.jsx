@@ -11,7 +11,7 @@ import TransactionConfirmStore from "stores/TransactionConfirmStore";
 import LoadingIndicator from "../LoadingIndicator";
 import Translate from "react-translate-component";
 import counterpart from "counterpart";
-import {ChainStore, FetchChain, key} from "bitsharesjs";
+import {ChainStore, FetchChain, key} from "eidosjs";
 import ReactTooltip from "react-tooltip";
 import utils from "common/utils";
 import SettingsActions from "actions/SettingsActions";
@@ -20,7 +20,7 @@ import Icon from "../Icon/Icon";
 import CopyButton from "../Utility/CopyButton";
 import {withRouter} from "react-router-dom";
 import {scroller} from "react-scroll";
-import {Notification, Tooltip} from "bitshares-ui-style-guide";
+import {Notification} from "bitshares-ui-style-guide";
 
 class CreateAccountPassword extends React.Component {
     constructor() {
@@ -266,18 +266,18 @@ class CreateAccountPassword extends React.Component {
                         <label className="left-label">
                             <Translate content="wallet.generated" />
                             &nbsp;&nbsp;
-                            <Tooltip
-                                title={counterpart.translate(
+                            <span
+                                className="tooltip"
+                                data-html={true}
+                                data-tip={counterpart.translate(
                                     "tooltip.generate"
                                 )}
                             >
-                                <span className="tooltip">
-                                    <Icon
-                                        name="question-circle"
-                                        title="icons.question_circle"
-                                    />
-                                </span>
-                            </Tooltip>
+                                <Icon
+                                    name="question-circle"
+                                    title="icons.question_circle"
+                                />
+                            </span>
                         </label>
                         <div style={{paddingBottom: "0.5rem"}}>
                             <span className="inline-label">

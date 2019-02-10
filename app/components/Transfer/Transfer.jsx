@@ -12,7 +12,7 @@ import TransactionConfirmStore from "stores/TransactionConfirmStore";
 import TranslateWithLinks from "../Utility/TranslateWithLinks";
 import {RecentTransactions} from "../Account/RecentTransactions";
 import Immutable from "immutable";
-import {ChainStore} from "bitsharesjs";
+import {ChainStore} from "eidosjs";
 import {connect} from "alt-react";
 import {
     checkFeeStatusAsync,
@@ -24,7 +24,6 @@ import classnames from "classnames";
 import {Asset} from "common/MarketClasses";
 import queryString from "query-string";
 import SendModal from "../Modal/SendModal";
-import {Tooltip} from "bitshares-ui-style-guide";
 
 class Transfer extends React.Component {
     constructor(props) {
@@ -610,19 +609,15 @@ class Transfer extends React.Component {
                                     {memo.length}
                                 </label>
                             ) : null}
-                            <Tooltip
-                                placement="top"
-                                title={counterpart.translate(
+                            <Translate
+                                className="left-label tooltip"
+                                component="label"
+                                content="transfer.memo"
+                                data-place="top"
+                                data-tip={counterpart.translate(
                                     "tooltip.memo_tip"
                                 )}
-                            >
-                                <Translate
-                                    className="left-label tooltip"
-                                    component="label"
-                                    content="transfer.memo"
-                                    data-place="top"
-                                />
-                            </Tooltip>
+                            />
                             <textarea
                                 style={{marginBottom: 0}}
                                 rows="3"

@@ -18,7 +18,7 @@ import {routerTransitioner} from "../../routerTransition";
 import LoadingIndicator from "../LoadingIndicator";
 import counterpart from "counterpart";
 import ChoiceModal from "../Modal/ChoiceModal";
-import {ChainStore} from "bitsharesjs";
+import {ChainStore} from "eidosjs";
 import ifvisible from "ifvisible";
 import {getWalletName} from "branding";
 import {Tooltip} from "bitshares-ui-style-guide";
@@ -392,6 +392,8 @@ class Footer extends React.Component {
 
         this._ensureConnectivity();
 
+        console.log("asdasd");
+
         return (
             <div>
                 {!!routerTransitioner &&
@@ -554,22 +556,14 @@ class Footer extends React.Component {
                         {this.props.backup_recommended ? (
                             <span>
                                 <div className="grid-block">
-                                    <Tooltip
-                                        overlay={
-                                            <div>
-                                                Please understand that you are
-                                                responsible for making your own
-                                                backup&hellip;
-                                            </div>
-                                        }
+                                    <a
+                                        className="shrink txtlabel facolor-alert"
+                                        data-tip="Please understand that you are responsible for making your own backup&hellip;"
+                                        data-type="warning"
+                                        onClick={this.onBackup.bind(this)}
                                     >
-                                        <a
-                                            className="shrink txtlabel facolor-alert"
-                                            onClick={this.onBackup.bind(this)}
-                                        >
-                                            <Translate content="footer.backup" />
-                                        </a>
-                                    </Tooltip>
+                                        <Translate content="footer.backup" />
+                                    </a>
                                     &nbsp;&nbsp;
                                 </div>
                             </span>

@@ -4,7 +4,7 @@ import LoadingIndicator from "../LoadingIndicator";
 import LogsActions from "actions/LogsActions";
 import CopyButton from "../Utility/CopyButton";
 import html2canvas from "html2canvas";
-import {Modal, Button, Tooltip} from "bitshares-ui-style-guide";
+import {Modal, Button} from "bitshares-ui-style-guide";
 import counterpart from "counterpart";
 import Icon from "../Icon/Icon";
 
@@ -182,8 +182,10 @@ class ReportModal extends React.Component {
                             <CopyButton text={this.state.logEntries} />
                         </div>
 
-                        <Tooltip
-                            title={
+                        <div
+                            onClick={this.showLog}
+                            style={{cursor: "pointer"}}
+                            data-tip={
                                 this.state.showLog
                                     ? counterpart.translate(
                                           "modal.report.hideLog"
@@ -193,24 +195,19 @@ class ReportModal extends React.Component {
                                       )
                             }
                         >
-                            <div
-                                onClick={this.showLog}
-                                style={{cursor: "pointer"}}
+                            <label
+                                className="left-label"
+                                style={{
+                                    paddingTop: "1em",
+                                    paddingLeft: "0.5em",
+                                    cursor: "pointer"
+                                }}
                             >
-                                <label
-                                    className="left-label"
-                                    style={{
-                                        paddingTop: "1em",
-                                        paddingLeft: "0.5em",
-                                        cursor: "pointer"
-                                    }}
-                                >
-                                    {this.state.showLog ? "-" : "+"}
-                                    &nbsp;
-                                    <Translate content="modal.report.lastLogEntries" />
-                                </label>
-                            </div>
-                        </Tooltip>
+                                {this.state.showLog ? "-" : "+"}
+                                &nbsp;
+                                <Translate content="modal.report.lastLogEntries" />
+                            </label>
+                        </div>
 
                         {logsArea()}
                     </span>
@@ -249,8 +246,10 @@ class ReportModal extends React.Component {
                             <Translate content="modal.report.copyScreenshot" />
                         </div>
 
-                        <Tooltip
-                            title={
+                        <div
+                            onClick={this.showScreenshot}
+                            style={{cursor: "pointer"}}
+                            data-tip={
                                 this.state.showScreen
                                     ? counterpart.translate(
                                           "modal.report.hideScreenshot"
@@ -260,24 +259,19 @@ class ReportModal extends React.Component {
                                       )
                             }
                         >
-                            <div
-                                onClick={this.showScreenshot}
-                                style={{cursor: "pointer"}}
+                            <label
+                                className="left-label"
+                                style={{
+                                    paddingTop: "1em",
+                                    paddingLeft: "0.5em",
+                                    cursor: "pointer"
+                                }}
                             >
-                                <label
-                                    className="left-label"
-                                    style={{
-                                        paddingTop: "1em",
-                                        paddingLeft: "0.5em",
-                                        cursor: "pointer"
-                                    }}
-                                >
-                                    {this.state.showScreen ? "-" : "+"}
-                                    &nbsp;
-                                    <Translate content="modal.report.screenshot" />
-                                </label>
-                            </div>
-                        </Tooltip>
+                                {this.state.showScreen ? "-" : "+"}
+                                &nbsp;
+                                <Translate content="modal.report.screenshot" />
+                            </label>
+                        </div>
 
                         {screenshotArea()}
                     </span>

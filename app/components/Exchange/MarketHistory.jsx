@@ -11,7 +11,7 @@ import SettingsStore from "stores/SettingsStore";
 import {connect} from "alt-react";
 import TransitionWrapper from "../Utility/TransitionWrapper";
 import AssetName from "../Utility/AssetName";
-import {ChainTypes as grapheneChainTypes} from "bitsharesjs";
+import {ChainTypes as grapheneChainTypes} from "eidosjs";
 const {operations} = grapheneChainTypes;
 import BlockDate from "../Utility/BlockDate";
 import counterpart from "counterpart";
@@ -19,7 +19,6 @@ import ReactTooltip from "react-tooltip";
 import getLocale from "browser-locale";
 import utils from "common/utils";
 import {FillOrder} from "common/MarketClasses";
-import {Tooltip} from "bitshares-ui-style-guide";
 
 class MarketHistory extends React.Component {
     constructor(props) {
@@ -216,23 +215,20 @@ class MarketHistory extends React.Component {
                             </td>
                             <td>{fill.amountToReceive()}</td>
                             <td>{fill.amountToPay()}</td>
-                            <td>
-                                <Tooltip title={fill.time.toString()}>
-                                    <div
-                                        className="tooltip"
-                                        style={{whiteSpace: "nowrap"}}
-                                    >
-                                        {counterpart.localize(fill.time, {
-                                            type: "date",
-                                            format:
-                                                getLocale()
-                                                    .toLowerCase()
-                                                    .indexOf("en-us") !== -1
-                                                    ? "market_history_us"
-                                                    : "market_history"
-                                        })}
-                                    </div>
-                                </Tooltip>
+                            <td
+                                className="tooltip"
+                                style={{whiteSpace: "nowrap"}}
+                                data-tip={fill.time}
+                            >
+                                {counterpart.localize(fill.time, {
+                                    type: "date",
+                                    format:
+                                        getLocale()
+                                            .toLowerCase()
+                                            .indexOf("en-us") !== -1
+                                            ? "market_history_us"
+                                            : "market_history"
+                                })}
                             </td>
                         </tr>
                     );

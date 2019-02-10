@@ -5,7 +5,6 @@ import BlockchainStore from "stores/BlockchainStore";
 import BlockchainActions from "actions/BlockchainActions";
 import ReactTooltip from "react-tooltip";
 import getLocale from "browser-locale";
-import {Tooltip} from "bitshares-ui-style-guide";
 
 /**
  * @brief displays block's date and time based on block number
@@ -43,16 +42,15 @@ class BlockDate extends React.Component {
         return React.createElement(
             component,
             {
-                className: tooltip ? "tooltip" : ""
+                className: tooltip ? "tooltip" : "",
+                "data-tip": tooltip ? blockHeader.timestamp : ""
             },
-            <Tooltip title={tooltip ? blockHeader.timestamp : ""}>
-                <span>
-                    {counterpart.localize(blockHeader.timestamp, {
-                        type: "date",
-                        format
-                    })}
-                </span>
-            </Tooltip>
+            <span>
+                {counterpart.localize(blockHeader.timestamp, {
+                    type: "date",
+                    format
+                })}
+            </span>
         );
     }
 }

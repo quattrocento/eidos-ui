@@ -4,7 +4,7 @@ import AccountStore from "stores/AccountStore";
 import AccountActions from "actions/AccountActions";
 import counterpart from "counterpart";
 import Translate from "react-translate-component";
-import {Button, Modal, Icon, Popover, Tooltip} from "bitshares-ui-style-guide";
+import {Button, Modal, Icon, Popover} from "bitshares-ui-style-guide";
 
 class AccountBrowsingMode extends React.Component {
     constructor(props) {
@@ -121,21 +121,18 @@ class AccountBrowsingMode extends React.Component {
                         )}
                     </Modal>
                     {!this.isMyAccount() ? (
-                        <Tooltip
-                            placement="bottom"
-                            title={counterpart.translate(
+                        <Button
+                            data-place="bottom"
+                            data-tip={counterpart.translate(
                                 "account_browsing_mode.you_are_in_browsing_mode"
                             )}
+                            onClick={this.handleSwitchBack}
+                            className="hide-for-small-only account-browsing-mode--button"
                         >
-                            <Button
-                                onClick={this.handleSwitchBack}
-                                className="hide-for-small-only account-browsing-mode--button"
-                            >
-                                {counterpart.translate(
-                                    "account_browsing_mode.view_mode"
-                                )}
-                            </Button>
-                        </Tooltip>
+                            {counterpart.translate(
+                                "account_browsing_mode.view_mode"
+                            )}
+                        </Button>
                     ) : null}
                 </div>
             );

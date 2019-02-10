@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Translate from "react-translate-component";
-import {ChainStore, FetchChain} from "bitsharesjs/es";
+import {ChainStore, FetchChain} from "eidosjs/es";
 import counterpart from "counterpart";
 import AccountActions from "actions/AccountActions";
 import WalletUnlockActions from "actions/WalletUnlockActions";
@@ -20,8 +20,7 @@ import {
     Input,
     Button,
     Select,
-    Alert,
-    Tooltip
+    Alert
 } from "bitshares-ui-style-guide";
 
 class WalletRegistrationForm extends React.Component {
@@ -245,18 +244,16 @@ class WalletRegistrationForm extends React.Component {
                             {counterpart.translate("settings.password")}
                         </span>
                         &nbsp;
-                        <Tooltip
-                            title={counterpart.translate(
+                        <span
+                            data-tip={counterpart.translate(
                                 "tooltip.registration.password"
                             )}
                         >
-                            <span>
-                                <Icon
-                                    name="question-in-circle"
-                                    className="icon-14px question-icon vertical-middle"
-                                />
-                            </span>
-                        </Tooltip>
+                            <Icon
+                                name="question-in-circle"
+                                className="icon-14px question-icon vertical-middle"
+                            />
+                        </span>
                     </span>
                 }
             />
@@ -297,18 +294,16 @@ class WalletRegistrationForm extends React.Component {
                                 {counterpart.translate("account.name")}
                             </span>
                             &nbsp;
-                            <Tooltip
-                                title={counterpart.translate(
+                            <span
+                                data-tip={counterpart.translate(
                                     "tooltip.registration.accountName"
                                 )}
                             >
-                                <span>
-                                    <Icon
-                                        name="question-in-circle"
-                                        className="icon-14px question-icon vertical-middle"
-                                    />
-                                </span>
-                            </Tooltip>
+                                <Icon
+                                    name="question-in-circle"
+                                    className="icon-14px question-icon vertical-middle"
+                                />
+                            </span>
                         </span>
                     }
                     noLabel

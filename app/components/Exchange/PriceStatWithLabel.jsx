@@ -4,7 +4,6 @@ import AssetName from "../Utility/AssetName";
 import utils from "common/utils";
 import cnames from "classnames";
 import ReactTooltip from "react-tooltip";
-import {Tooltip} from "bitshares-ui-style-guide";
 
 export default class PriceStatWithLabel extends React.Component {
     constructor() {
@@ -87,23 +86,22 @@ export default class PriceStatWithLabel extends React.Component {
                     changeClasses
                 )}
                 onClick={this.props.onClick}
+                data-place="bottom"
+                data-tip={toolTip}
             >
-                <Tooltip placement="bottom" title={toolTip}>
-                    <span>
-                        <span className="value stat-primary">
-                            {!ready ? 0 : value}
-                            &nbsp;
-                        </span>
-                        <span className="symbol-text">
-                            <AssetName name={base.get("symbol")} />
-                        </span>
+                <span>
+                    <span className="value stat-primary">
+                        {!ready ? 0 : value}&nbsp;
                     </span>
-                    {content ? (
-                        <div className="stat-text">
-                            <Translate content={content} />
-                        </div>
-                    ) : null}
-                </Tooltip>
+                    <span className="symbol-text">
+                        <AssetName name={base.get("symbol")} />
+                    </span>
+                </span>
+                {content ? (
+                    <div className="stat-text">
+                        <Translate content={content} />
+                    </div>
+                ) : null}
             </li>
         );
     }

@@ -1,7 +1,7 @@
 import React from "react";
 import ZfApi from "react-foundation-apps/src/utils/foundation-api";
 import Translate from "react-translate-component";
-import {ChainStore} from "bitsharesjs";
+import {ChainStore} from "eidosjs";
 import AccountSelect from "../Forms/AccountSelect";
 import AmountSelector from "../Utility/AmountSelector";
 import AccountStore from "stores/AccountStore";
@@ -21,7 +21,7 @@ import counterpart from "counterpart";
 import {connect} from "alt-react";
 import classnames from "classnames";
 import {getWalletName} from "branding";
-import {Modal, Button, Tooltip} from "bitshares-ui-style-guide";
+import {Modal, Button} from "bitshares-ui-style-guide";
 
 const EqualWidthContainer = ({children}) => (
     <div
@@ -806,18 +806,15 @@ class SendModal extends React.Component {
                                                 {memo.length}
                                             </label>
                                         ) : null}
-                                        <Tooltip
-                                            placement="top"
-                                            title={counterpart.translate(
+                                        <Translate
+                                            className="left-label tooltip"
+                                            component="label"
+                                            content="transfer.memo"
+                                            data-place="top"
+                                            data-tip={counterpart.translate(
                                                 "tooltip.memo_tip"
                                             )}
-                                        >
-                                            <Translate
-                                                className="left-label tooltip"
-                                                component="label"
-                                                content="transfer.memo"
-                                            />
-                                        </Tooltip>
+                                        />
                                         <textarea
                                             style={{marginBottom: 0}}
                                             rows="3"

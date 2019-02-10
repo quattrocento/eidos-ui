@@ -10,7 +10,7 @@ import LinkToAccountById from "../Utility/LinkToAccountById";
 import LinkToAssetById from "../Utility/LinkToAssetById";
 import BindToChainState from "../Utility/BindToChainState";
 import FormattedPrice from "../Utility/FormattedPrice";
-import {ChainStore, ChainTypes as grapheneChainTypes} from "bitsharesjs";
+import {ChainStore, ChainTypes as grapheneChainTypes} from "eidosjs";
 import account_constants from "chain/account_constants";
 import MemoText from "./MemoText";
 import TranslateWithLinks from "../Utility/TranslateWithLinks";
@@ -129,7 +129,7 @@ class ProposedOperation extends React.Component {
     }
 
     render() {
-        let {op, proposer, current, block, hideExpiration, index} = this.props;
+        let {op, proposer, current, block, hideExpiration} = this.props;
         let line = null,
             column = null,
             color = "info";
@@ -150,8 +150,8 @@ class ProposedOperation extends React.Component {
                 column = (
                     <span className="right-td">
                         <div className="inline-block">
-                            {!!proposer && index == 0 ? (
-                                <div style={{paddingBottom: "0.5rem"}}>
+                            {!!proposer ? (
+                                <div style={{paddingBottom: 5}}>
                                     <TranslateWithLinks
                                         string="operation.proposal_create"
                                         keys={[
@@ -162,7 +162,6 @@ class ProposedOperation extends React.Component {
                                             }
                                         ]}
                                     />
-                                    :
                                 </div>
                             ) : null}
                             <div>

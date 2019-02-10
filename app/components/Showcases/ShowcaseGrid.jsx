@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import Showcase from "./Showcase";
 import {connect} from "alt-react";
-import {ChainStore} from "bitsharesjs";
+import {ChainStore} from "eidosjs";
 import AccountStore from "../../stores/AccountStore";
 import {createPaperWalletAsPDF} from "common/paperWallet";
 
@@ -61,28 +61,21 @@ class ShowcaseGrid extends Component {
                     : "Please login to use this functionality"
             },
             {
-                title: "showcases.barter.title",
-                target: event => {
-                    thiz.props.history.push("/barter");
-                },
-                description: "showcases.barter.description",
+                title: "showcases.barter_transaction.title",
+                target: () => {},
+                description: "showcases.barter_transaction.description",
                 icon: "barter",
-                disabled: hasAccount
-                    ? false
-                    : "Please login to use this functionality"
+                disabled: true,
+                comingSoon: true
             },
             {
                 title: "showcases.borrow.title",
-                target: () => {
-                    if (hasAccount) {
-                        thiz.props.history.push("/borrow");
-                    }
-                },
+                target: () => {},
                 description: "showcases.borrow.description",
                 icon: "borrow",
-                disabled: hasAccount
-                    ? false
-                    : "Please login to use this functionality"
+                disabled:
+                    "Easy wizard coming soon. Already available in Dashboard > Margin Positions",
+                comingSoon: true
             },
             {
                 title: "showcases.direct_debit.title",

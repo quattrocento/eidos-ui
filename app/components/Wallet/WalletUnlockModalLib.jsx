@@ -2,7 +2,7 @@ import React from "react";
 import Translate from "react-translate-component";
 import counterpart from "counterpart";
 import {getWalletName} from "branding";
-import {Alert, Checkbox, Tooltip} from "bitshares-ui-style-guide";
+import {Alert, Checkbox} from "bitshares-ui-style-guide";
 
 /* Dummy input to trick Chrome into disabling auto-complete */
 export const DisableChromeAutocomplete = () => (
@@ -93,20 +93,21 @@ export const BackupWarning = ({onChange, checked}) => (
 );
 
 export const LoginButtons = ({onLogin, backupLogin}) => (
-    <Tooltip
-        placement="bottom"
-        title={counterpart.translate("tooltip.login", {
+    <button
+        className="button"
+        data-place="bottom"
+        data-html
+        data-tip={counterpart.translate("tooltip.login", {
             wallet_name: getWalletName()
         })}
+        onClick={onLogin}
     >
-        <button className="button" onClick={onLogin}>
-            <Translate
-                content={
-                    backupLogin ? "wallet.backup_login" : "header.unlock_short"
-                }
-            />
-        </button>
-    </Tooltip>
+        <Translate
+            content={
+                backupLogin ? "wallet.backup_login" : "header.unlock_short"
+            }
+        />
+    </button>
 );
 
 export class CustomPasswordInput extends React.Component {

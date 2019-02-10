@@ -4,7 +4,6 @@ import ReactTooltip from "react-tooltip";
 import utils from "common/utils";
 import counterpart from "counterpart";
 import Translate from "react-translate-component";
-import {Tooltip as AntTooltip} from "bitshares-ui-style-guide";
 
 export class Tooltip extends React.Component {
     componentDidMount() {
@@ -13,9 +12,13 @@ export class Tooltip extends React.Component {
     render() {
         const {className, children, dataTip, content} = this.props;
         return (
-            <AntTooltip title={dataTip || counterpart.translate(content)}>
-                <span className={"tooltip " + className}>{children}</span>
-            </AntTooltip>
+            <span
+                className={"tooltip " + className}
+                data-html={true}
+                data-tip={dataTip || counterpart.translate(content)}
+            >
+                {children}
+            </span>
         );
     }
 }
@@ -84,8 +87,7 @@ export const KeyPermissionBranch = ({available, permission, weight, level}) => (
         <tr>
             <td colSpan="2">
                 <ApprovedIcon approved={permission.isAvailable(available)} />
-                {permission.id.substr(0, 20 - 4 * level)}
-                ...
+                {permission.id.substr(0, 20 - 4 * level)}...
             </td>
             <td>{weight}</td>
         </tr>

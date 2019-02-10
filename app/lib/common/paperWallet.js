@@ -10,7 +10,7 @@ const _createPaperWalletAsPDF = function(
     accountName
 ) {
     const width = 300,
-        height = 450, //mm
+        height = 450,
         lineMargin = 5,
         qrSize = 50,
         textMarginLeft = qrSize + 7,
@@ -22,7 +22,8 @@ const _createPaperWalletAsPDF = function(
         logoHeight = logoWidth / 2.8, //  logo original width/height=2.8
         logoPositionX = (width - logoWidth) / 2;
     let rowHeight = logoHeight + 50;
-    const keys = [activeKeys, ownerkeys, memoKey];
+
+    const keys = [ownerkeys, activeKeys, memoKey];
     const keysName = ["Active Key", "Owner Key", "Memo Key"];
 
     let locked = WalletDb.isLocked();
@@ -33,16 +34,7 @@ const _createPaperWalletAsPDF = function(
         compressPdf: true
     });
 
-    const checkPageH = (pdfInstance, currentPageH, maxPageH) => {
-        if (currentPageH >= maxPageH) {
-            pdfInstance.addPage();
-            rowHeight = 10;
-        }
-        return pdf.internal.getNumberOfPages();
-    };
-
     const keyRow = publicKey => {
-        let currentPage = checkPageH(pdf, rowHeight, 400);
         let privateKey = null;
         if (!locked) {
             privateKey = WalletDb.getPrivateKey(publicKey);
@@ -50,9 +42,9 @@ const _createPaperWalletAsPDF = function(
                 privateKey = privateKey.toWif();
             }
         }
-        gQrcode(publicKey, qrMargin, rowHeight + 10, currentPage);
+        gQrcode(publicKey, qrMargin, rowHeight + 10);
         if (!locked && !!privateKey) {
-            gQrcode(privateKey, qrRightPos, rowHeight + 10, currentPage);
+            gQrcode(privateKey, qrRightPos, rowHeight + 10);
         }
         pdf.text("PublicKey", textMarginLeft, rowHeight + 20);
         pdf.text(publicKey, textMarginLeft, rowHeight + 30);
@@ -66,13 +58,11 @@ const _createPaperWalletAsPDF = function(
             }
             pdf.rect(textMarginLeft - 1, rowHeight + 44, textWidth, textHeight);
         }
-        rowHeight += 50;
+        rowHeight += 70;
     };
-
-    const gQrcode = (qrcode, rowWidth, rowHeight, currentPage) => {
+    const gQrcode = (qrcode, rowWidth, rowHeight) => {
         QRCode.toDataURL(qrcode)
             .then(url => {
-                pdf.setPage(currentPage);
                 pdf.addImage(url, "JPEG", rowWidth, rowHeight, qrSize, qrSize);
             })
             .catch(err => {
@@ -96,10 +86,6 @@ const _createPaperWalletAsPDF = function(
     pdf.text(accountName, 42, rowHeight - 10);
 
     let content = keys.map((publicKeys, index) => {
-        if (index >= 1) {
-            rowHeight += 25; // add margin-top for block
-        }
-        checkPageH(pdf, rowHeight, 400);
         pdf.text("Public", 22, rowHeight + 7);
         pdf.text(keysName[index], 120, rowHeight + 7);
         if (!locked) {
@@ -115,7 +101,6 @@ const _createPaperWalletAsPDF = function(
             });
         }
     });
-
     Promise.all(content).then(() => {
         pdf.save(
             "bitshares" +

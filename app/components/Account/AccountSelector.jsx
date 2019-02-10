@@ -5,7 +5,7 @@ import AccountImage from "../Account/AccountImage";
 import AccountStore from "stores/AccountStore";
 import AccountActions from "actions/AccountActions";
 import Translate from "react-translate-component";
-import {ChainStore, PublicKey, ChainValidation, FetchChain} from "bitsharesjs";
+import {ChainStore, PublicKey, ChainValidation, FetchChain} from "eidosjs";
 import ChainTypes from "../Utility/ChainTypes";
 import BindToChainState from "../Utility/BindToChainState";
 import classnames from "classnames";
@@ -16,7 +16,6 @@ import FloatingDropdown from "../Utility/FloatingDropdown";
 import TypeAhead from "../Utility/TypeAhead";
 import cnames from "classnames";
 import PropTypes from "prop-types";
-import {Tooltip} from "bitshares-ui-style-guide";
 
 /**
  * @brief Allows the user to enter an account by name or #ID
@@ -319,41 +318,39 @@ class AccountSelector extends React.Component {
         let linked_status = !this.props.account ? null : myActiveAccounts.has(
             account.get("name")
         ) || contacts.has(account.get("name")) ? (
-            <Tooltip
-                placement="top"
-                title={counterpart.translate("tooltip.follow_user")}
+            <span
+                className="tooltip green"
+                data-place="top"
+                data-tip={counterpart.translate("tooltip.follow_user")}
                 onClick={this._onRemoveContact.bind(this)}
             >
-                <span className="tooltip green">
-                    <Icon
-                        style={{
-                            position: "absolute",
-                            top: "-0.15em",
-                            right: ".2em"
-                        }}
-                        name="user"
-                        title="icons.user.following"
-                    />
-                </span>
-            </Tooltip>
+                <Icon
+                    style={{
+                        position: "absolute",
+                        top: "-0.15em",
+                        right: ".2em"
+                    }}
+                    name="user"
+                    title="icons.user.following"
+                />
+            </span>
         ) : (
-            <Tooltip
-                placement="top"
-                title={counterpart.translate("tooltip.follow_user_add")}
+            <span
+                className="tooltip"
+                data-place="top"
+                data-tip={counterpart.translate("tooltip.follow_user_add")}
                 onClick={this._onAddContact.bind(this)}
             >
-                <span className="tooltip">
-                    <Icon
-                        style={{
-                            position: "absolute",
-                            top: "-0.05em",
-                            right: ".2em"
-                        }}
-                        name="plus-circle"
-                        title="icons.plus_circle.add_contact"
-                    />
-                </span>
-            </Tooltip>
+                <Icon
+                    style={{
+                        position: "absolute",
+                        top: "-0.05em",
+                        right: ".2em"
+                    }}
+                    name="plus-circle"
+                    title="icons.plus_circle.add_contact"
+                />
+            </span>
         );
 
         let action_class = classnames("button", {
@@ -400,7 +397,7 @@ class AccountSelector extends React.Component {
                             {useHR && <hr />}
                         </div>
                     ) : null}
-                    <Tooltip className="input-area" title={this.props.tooltip}>
+                    <div className="input-area" data-tip={this.props.tooltip}>
                         <div className="inline-label input-wrapper">
                             {account && account.accountType === "pubkey" ? (
                                 <div className="account-image">
@@ -506,7 +503,7 @@ class AccountSelector extends React.Component {
                                 </button>
                             ) : null}
                         </div>
-                    </Tooltip>
+                    </div>
 
                     {error || reserveErrorSpace ? (
                         <div

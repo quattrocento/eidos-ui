@@ -24,7 +24,7 @@ import {connect} from "alt-react";
 import SettingsStore from "stores/SettingsStore";
 import SettingsActions from "actions/SettingsActions";
 import QRCode from "qrcode.react";
-import {Modal, Button, Tooltip} from "bitshares-ui-style-guide";
+import {Modal, Button} from "bitshares-ui-style-guide";
 
 // import DepositFiatOpenLedger from "components/DepositWithdraw/openledger/DepositFiatOpenLedger";
 // import WithdrawFiatOpenLedger from "components/DepositWithdraw/openledger/WithdrawFiatOpenLedger";
@@ -338,23 +338,20 @@ class SimpleDepositBlocktradesBridge extends React.Component {
                         <label className="left-label">
                             <Translate content="modal.buy.bridge" />
                         </label>
-                        <Tooltip
-                            title={counterpart.translate(
+                        <span
+                            data-tip={counterpart.translate(
                                 "tooltip.bridge_TRADE"
                             )}
+                            className="inline-block tooltip"
+                            onClick={this.onBlockTradesContact.bind(this)}
                         >
-                            <span
-                                className="inline-block tooltip"
-                                onClick={this.onBlockTradesContact.bind(this)}
-                            >
-                                &nbsp;
-                                <Icon
-                                    style={{position: "relative", top: 0}}
-                                    name="question-circle"
-                                    title="icons.question_circle"
-                                />
-                            </span>
-                        </Tooltip>
+                            &nbsp;
+                            <Icon
+                                style={{position: "relative", top: 0}}
+                                name="question-circle"
+                                title="icons.question_circle"
+                            />
+                        </span>
                     </div>
                     <div className="inline-label input-wrapper">
                         <input
@@ -374,20 +371,19 @@ class SimpleDepositBlocktradesBridge extends React.Component {
                                         <Translate content="transfer.send" />
                                     </label>
                                     {aboveLimit ? (
-                                        <Tooltip
-                                            title={counterpart.translate(
+                                        <div
+                                            className="error-msg inline-block tooltip"
+                                            data-tip={counterpart.translate(
                                                 "tooltip.over_limit"
                                             )}
                                         >
-                                            <div className="error-msg inline-block tooltip">
-                                                <Translate content="gateway.over_limit" />
-                                                &nbsp;
-                                                <Icon
-                                                    name="question-circle"
-                                                    title="icons.question_circle"
-                                                />
-                                            </div>
-                                        </Tooltip>
+                                            <Translate content="gateway.over_limit" />
+                                            &nbsp;
+                                            <Icon
+                                                name="question-circle"
+                                                title="icons.question_circle"
+                                            />
+                                        </div>
                                     ) : null}
                                 </div>
                                 <div className="inline-label input-wrapper">
@@ -582,23 +578,20 @@ class SimpleDepositBlocktradesBridge extends React.Component {
                 {assetName}
             </span>
         ) : (
-            <Tooltip
-                placement="right"
-                title={counterpart.translate("tooltip.withdraw_full")}
+            <button
+                data-place="right"
+                data-tip={counterpart.translate("tooltip.withdraw_full")}
+                className="button"
+                style={{border: "2px solid black", borderLeft: "none"}}
+                onClick={this._updateAmount.bind(
+                    this,
+                    !currentBalance
+                        ? 0
+                        : parseInt(currentBalance.get("balance"), 10)
+                )}
             >
-                <button
-                    className="button"
-                    style={{border: "2px solid black", borderLeft: "none"}}
-                    onClick={this._updateAmount.bind(
-                        this,
-                        !currentBalance
-                            ? 0
-                            : parseInt(currentBalance.get("balance"), 10)
-                    )}
-                >
-                    <Icon name="clippy" title="icons.clippy.withdraw_full" />
-                </button>
-            </Tooltip>
+                <Icon name="clippy" title="icons.clippy.withdraw_full" />
+            </button>
         );
 
         return (

@@ -1,8 +1,7 @@
 import React from "react";
 import {FormattedRelative} from "react-intl";
-import {ChainStore} from "bitsharesjs";
+import {ChainStore} from "eidosjs";
 import PropTypes from "prop-types";
-import {Tooltip} from "bitshares-ui-style-guide";
 
 class TimeAgo extends React.Component {
     static propTypes = {
@@ -53,18 +52,18 @@ class TimeAgo extends React.Component {
         }
 
         return (
-            <Tooltip placement="bottom" title={new Date(time).toString()}>
-                <span
-                    className={"tooltip inline-block " + this.props.className}
-                    ref={"timeago_ttip_" + time}
-                >
-                    <FormattedRelative
-                        updateInterval={interval}
-                        value={new Date(time).getTime() + offset_mills * 0.75}
-                        initialNow={Date.now()}
-                    />
-                </span>
-            </Tooltip>
+            <span
+                className={"tooltip inline-block " + this.props.className}
+                ref={"timeago_ttip_" + time}
+                data-tip={new Date(time)}
+                data-place="bottom"
+            >
+                <FormattedRelative
+                    updateInterval={interval}
+                    value={new Date(time).getTime() + offset_mills * 0.75}
+                    initialNow={Date.now()}
+                />
+            </span>
         );
     }
 }

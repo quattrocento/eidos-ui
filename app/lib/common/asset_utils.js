@@ -70,7 +70,7 @@ export default class AssetUtils {
             }
         });
 
-        if (isBitAsset && flagBooleans["global_settle"]) {
+        if (isBitAsset) {
             flags += assetConstants.permission_flags["global_settle"];
         }
 

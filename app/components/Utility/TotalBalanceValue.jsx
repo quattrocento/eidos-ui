@@ -4,7 +4,7 @@ import ChainTypes from "./ChainTypes";
 import BindToChainState from "./BindToChainState";
 import utils from "common/utils";
 import marketUtils from "common/market_utils";
-import {ChainStore} from "bitsharesjs";
+import {ChainStore} from "eidosjs";
 import {connect} from "alt-react";
 import MarketsStore from "stores/MarketsStore";
 import SettingsStore from "stores/SettingsStore";
@@ -15,7 +15,6 @@ import MarketStatsCheck from "./MarketStatsCheck";
 import AssetWrapper from "./AssetWrapper";
 import ReactTooltip from "react-tooltip";
 import PropTypes from "prop-types";
-import {Tooltip} from "bitshares-ui-style-guide";
 
 /**
  *  Given an asset amount, displays the equivalent value in baseAsset if possible
@@ -283,27 +282,30 @@ class TotalValue extends MarketStatsCheck {
             );
         } else {
             return (
-                <Tooltip placement="bottom" title={totalsTip}>
-                    <div className="tooltip inline-block">
-                        {!!this.props.label ? (
-                            <span className="font-secondary">
-                                <Translate content={this.props.label} />:{" "}
-                            </span>
-                        ) : null}
-                        <FormattedAsset
-                            noTip
-                            noPrefix
-                            hide_asset={this.props.hide_asset}
-                            amount={totalValue}
-                            asset={toAsset.get("id")}
-                            decimalOffset={
-                                toAsset.get("symbol").indexOf("BTC") === -1
-                                    ? toAsset.get("precision") - 2
-                                    : 4
-                            }
-                        />
-                    </div>
-                </Tooltip>
+                <div
+                    className="tooltip inline-block"
+                    data-tip={totalsTip}
+                    data-place="bottom"
+                    data-html={true}
+                >
+                    {!!this.props.label ? (
+                        <span className="font-secondary">
+                            <Translate content={this.props.label} />:{" "}
+                        </span>
+                    ) : null}
+                    <FormattedAsset
+                        noTip
+                        noPrefix
+                        hide_asset={this.props.hide_asset}
+                        amount={totalValue}
+                        asset={toAsset.get("id")}
+                        decimalOffset={
+                            toAsset.get("symbol").indexOf("BTC") === -1
+                                ? toAsset.get("precision") - 2
+                                : 4
+                        }
+                    />
+                </div>
             );
         }
     }

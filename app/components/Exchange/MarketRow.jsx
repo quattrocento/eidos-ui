@@ -7,7 +7,6 @@ import Icon from "../Icon/Icon";
 import MarketsActions from "actions/MarketsActions";
 import SettingsActions from "actions/SettingsActions";
 import {withRouter} from "react-router-dom";
-import {Tooltip} from "bitshares-ui-style-guide";
 
 class MarketRow extends React.Component {
     static defaultProps = {
@@ -285,22 +284,19 @@ class MarketRow extends React.Component {
                                     marketID
                                 )}
                             >
-                                <Tooltip
-                                    title={
+                                <input
+                                    type="checkbox"
+                                    checked={
+                                        !!this.props.isChecked ||
+                                        this.props.isDefault
+                                    }
+                                    disabled={this.props.isDefault}
+                                    data-tip={
                                         this.props.isDefault
                                             ? "This market is a default market and cannot be removed"
                                             : null
                                     }
-                                >
-                                    <input
-                                        type="checkbox"
-                                        checked={
-                                            !!this.props.isChecked ||
-                                            this.props.isDefault
-                                        }
-                                        disabled={this.props.isDefault}
-                                    />
-                                </Tooltip>
+                                />
                             </td>
                         );
 
