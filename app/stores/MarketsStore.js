@@ -3,7 +3,7 @@ import alt from "alt-instance";
 import MarketsActions from "actions/MarketsActions";
 import market_utils from "common/market_utils";
 import ls from "common/localStorage";
-import {ChainStore} from "bitsharesjs";
+import {ChainStore} from "eidosjs";
 import utils from "common/utils";
 import {
     LimitOrder,
