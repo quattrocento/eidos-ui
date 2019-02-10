@@ -1,5 +1,5 @@
 import alt from "alt-instance";
-import {Apis} from "eidosjs-ws";
+import {Apis} from "bitsharesjs-ws";
 
 let latestBlocks = {};
 

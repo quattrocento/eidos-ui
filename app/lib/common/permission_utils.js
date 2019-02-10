@@ -1,4 +1,4 @@
-import {ChainStore} from "eidosjs";
+import {ChainStore} from "bitsharesjs";
 import Immutable from "immutable";
 
 let KeyAuth = function(auth) {

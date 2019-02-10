@@ -1,7 +1,7 @@
 import alt from "alt-instance";
 import iDB from "idb-instance";
-import {key} from "eidosjs";
-import {ChainConfig} from "eidosjs-ws";
+import {key} from "bitsharesjs";
+import {ChainConfig} from "bitsharesjs-ws";
 import Immutable from "immutable";
 import BaseStore from "stores/BaseStore";
 

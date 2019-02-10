@@ -385,9 +385,9 @@ module.exports = function(env) {
                     root_dir,
                     "node_modules/moment/moment.js"
                 ),
-                eidosjs$: path.resolve(
+                bitsharesjs$: path.resolve(
                     root_dir,
-                    "node_modules/eidosjs/"
+                    "node_modules/bitsharesjs/"
                 ),
                 "bitshares-ui-style-guide$": path.resolve(
                     root_dir,

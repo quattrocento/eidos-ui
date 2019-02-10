@@ -2,7 +2,7 @@ import React from "react";
 import Immutable from "immutable";
 import Translate from "react-translate-component";
 import accountUtils from "common/account_utils";
-import {ChainStore, FetchChainObjects} from "eidosjs";
+import {ChainStore, FetchChainObjects} from "bitsharesjs";
 import WorkerApproval from "./WorkerApproval";
 import VotingAccountsList from "./VotingAccountsList";
 import cnames from "classnames";
@@ -20,7 +20,7 @@ import FormattedAsset from "../Utility/FormattedAsset";
 import SettingsStore from "stores/SettingsStore";
 import stringSimilarity from "string-similarity";
 import {hiddenProposals} from "../../lib/common/hideProposals";
-import {Switch} from "bitshares-ui-style-guide";
+import {Switch, Tooltip} from "bitshares-ui-style-guide";
 import AccountStore from "stores/AccountStore";
 
 class AccountVoting extends React.Component {
@@ -806,18 +806,21 @@ class AccountVoting extends React.Component {
             <div
                 className="inline-block"
                 style={{marginLeft: "0.5em"}}
-                data-tip={counterpart.translate("tooltip.legacy_explanation")}
                 onClick={() => {
                     this.setState({
                         hideLegacyProposals: !this.state.hideLegacyProposals
                     });
                 }}
             >
-                <Switch
-                    style={{marginRight: 6}}
-                    checked={this.state.hideLegacyProposals}
-                />
-                <Translate content="account.votes.hide_legacy_proposals" />
+                <Tooltip
+                    title={counterpart.translate("tooltip.legacy_explanation")}
+                >
+                    <Switch
+                        style={{marginRight: 6}}
+                        checked={this.state.hideLegacyProposals}
+                    />
+                    <Translate content="account.votes.hide_legacy_proposals" />
+                </Tooltip>
             </div>
         );
 

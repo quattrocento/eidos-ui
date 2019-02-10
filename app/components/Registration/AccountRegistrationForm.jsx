@@ -4,7 +4,7 @@ import {connect} from "alt-react";
 import AccountStore from "stores/AccountStore";
 import Translate from "react-translate-component";
 import counterpart from "counterpart";
-import {ChainStore, key} from "eidosjs/es";
+import {ChainStore, key} from "bitsharesjs/es";
 import ReactTooltip from "react-tooltip";
 import utils from "common/utils";
 import SettingsActions from "actions/SettingsActions";
@@ -14,7 +14,7 @@ import AccountSelect from "../Forms/AccountSelect";
 import LoadingIndicator from "../LoadingIndicator";
 import Icon from "../Icon/Icon";
 import CopyButton from "../Utility/CopyButton";
-import {Form, Input, Button} from "bitshares-ui-style-guide";
+import {Form, Input, Button, Tooltip} from "bitshares-ui-style-guide";
 
 class AccountRegistrationForm extends React.Component {
     static propTypes = {
@@ -142,16 +142,18 @@ class AccountRegistrationForm extends React.Component {
                                     {counterpart.translate("account.name")}
                                 </span>
                                 &nbsp;
-                                <span
-                                    data-tip={counterpart.translate(
+                                <Tooltip
+                                    title={counterpart.translate(
                                         "tooltip.registration.accountName"
                                     )}
                                 >
-                                    <Icon
-                                        name="question-in-circle"
-                                        className="icon-14px question-icon vertical-middle"
-                                    />
-                                </span>
+                                    <span>
+                                        <Icon
+                                            name="question-in-circle"
+                                            className="icon-14px question-icon vertical-middle"
+                                        />
+                                    </span>
+                                </Tooltip>
                             </span>
                         }
                         noLabel

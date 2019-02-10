@@ -1,5 +1,5 @@
 import React from "react";
-import {Apis} from "eidosjs-ws";
+import {Apis} from "bitsharesjs-ws";
 import {connect} from "alt-react";
 
 import utils from "common/utils";

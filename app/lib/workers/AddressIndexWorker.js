@@ -1,4 +1,4 @@
-import {key} from "eidosjs";
+import {key} from "bitsharesjs";
 
 onmessage = function(event) {
     try {

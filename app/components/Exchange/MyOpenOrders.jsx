@@ -11,7 +11,7 @@ import TransitionWrapper from "../Utility/TransitionWrapper";
 import SettingsActions from "actions/SettingsActions";
 import AssetName from "../Utility/AssetName";
 import Icon from "../Icon/Icon";
-import {ChainStore} from "eidosjs";
+import {ChainStore} from "bitsharesjs";
 import {LimitOrder, CallOrder} from "common/MarketClasses";
 import {EquivalentValueComponent} from "../Utility/EquivalentValueComponent";
 import {MarketPrice} from "../Utility/MarketPrice";
@@ -20,6 +20,7 @@ const leftAlign = {textAlign: "left"};
 const rightAlign = {textAlign: "right"};
 const centerAlign = {textAlign: "center"};
 import ReactTooltip from "react-tooltip";
+import {Tooltip} from "bitshares-ui-style-guide";
 
 class TableHeader extends React.Component {
     render() {
@@ -164,21 +165,26 @@ class OrderRow extends React.Component {
                     )}{" "}
                     {valueSymbol}
                 </td>
-                <td
-                    style={{
-                        width: "25%",
-                        textAlign: "right",
-                        whiteSpace: "nowrap"
-                    }}
-                    className="tooltip"
-                    data-tip={order.expiration.toLocaleString()}
-                >
-                    {isCall
-                        ? null
-                        : counterpart.localize(new Date(order.expiration), {
-                              type: "date",
-                              format: "short_custom"
-                          })}
+                <td>
+                    <Tooltip title={order.expiration.toLocaleString()}>
+                        <div
+                            style={{
+                                width: "25%",
+                                textAlign: "right",
+                                whiteSpace: "nowrap"
+                            }}
+                        >
+                            {isCall
+                                ? null
+                                : counterpart.localize(
+                                      new Date(order.expiration),
+                                      {
+                                          type: "date",
+                                          format: "short_custom"
+                                      }
+                                  )}
+                        </div>
+                    </Tooltip>
                 </td>
                 <td className="text-center" style={{width: "6%"}}>
                     {isCall ? null : (

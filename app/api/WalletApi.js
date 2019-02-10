@@ -2,7 +2,7 @@ import {
     SerializerValidation,
     TransactionBuilder,
     TransactionHelper
-} from "eidosjs";
+} from "bitsharesjs";
 import ApplicationApi from "./ApplicationApi";
 
 const WalletApi = {

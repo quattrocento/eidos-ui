@@ -1,4 +1,4 @@
-import {ChainStore} from "eidosjs";
+import {ChainStore} from "bitsharesjs";
 import utils from "./utils";
 import counterpart from "counterpart";
 import {estimateFee} from "./trxHelper";

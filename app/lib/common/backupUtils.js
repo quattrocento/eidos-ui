@@ -1,4 +1,4 @@
-import {ChainConfig} from "eidosjs-ws";
+import {ChainConfig} from "bitsharesjs-ws";
 
 export function backupName(walletName, date = new Date()) {
     let name = walletName;
